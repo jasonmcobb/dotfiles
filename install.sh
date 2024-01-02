@@ -75,14 +75,14 @@ function install_or_upgrade_cask {
     HOMEBREW_NO_AUTO_UPDATE=0
 }
 
-echo "[+] - $(date '+%F %T') - Updating brew packages"
-for i in ${brew_packages[@]}
+echo "[+] - $(date '+%F %T') - Updating brew formulae"
+for i in $(cat $script_dir/brew/brew_formulae.list)
 do
     install_or_upgrade $i    
 done
 
 echo "[+] - $(date '+%F %T') - Updating brew cask packages"
-for i in ${brew_cask_packages[@]}
+for i in $(cat $script_dir/brew/brew_cask.list)
 do
     install_or_upgrade_cask $i
 done
