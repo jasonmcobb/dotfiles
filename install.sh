@@ -28,23 +28,28 @@ echo "[+] - $(date '+%F %T') - Dot File and Configuration Started"
 echo "[+] - $(date '+%F %T') - Installing Fonts"
 for file_name in $script_dir/fonts/*
 do
+    echo "    [+] - $(date '+%F %T') - $(awk 'END{ var=FILENAME; split (var,a,/\//); print a[length(a)]}' $file_name)"
     cp $file_name $HOME/Library/Fonts/
 done
 
 # Install oh-my-zsh
-echo "[+] - $(date '+%F %T') - Installing or Updating oh-my-zsh"
+echo "[+] - $(date '+%F %T') - Checking for oh-my-zsh"
 if ls $HOME/.oh-my-zsh >/dev/null 
 then
-    $HOME/.oh-my-zsh/tools/upgrade.sh
+    echo "    [+] - $(date '+%F %T') - oh-my-zsh found, updating"
+    $HOME/.oh-my-zsh/tools/upgrade.sh >/dev/null
 else
+    echo "    [+] - $(date '+%F %T') - oh-my-zsh not found, installing"
    sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
 fi
 
 # Install brew
-echo "[+] - $(date '+%F %T') - Installing or Updating brew"
+echo "[+] - $(date '+%F %T') - Checking for brew"
 if brew --version >/dev/null; then
+    echo "    [+] - $(date '+%F %T') - brew found, updating"
     brew update
-else
+else 
+    echo "[+] - $(date '+%F %T') - brew not found, installing"
     /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
 fi
 
