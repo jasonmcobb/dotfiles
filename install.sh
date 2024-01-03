@@ -13,16 +13,6 @@ dot_folders=(
 
 font_dir="fonts"
 
-brew_packages=(
-    nvim
-    stow    
-    tmux
-)
-
-brew_cask_packages=(
-    amethyst
-    wezterm
-)
 echo "[+] - $(date '+%F %T') - Dot File and Configuration Started" 
 # Install Fonts
 echo "[+] - $(date '+%F %T') - Installing Fonts"
