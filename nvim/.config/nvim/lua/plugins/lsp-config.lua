@@ -15,7 +15,6 @@ return {
 					"lua_ls",
 					"omnisharp",
 					"gopls",
-					"html",
 					"rust_analyzer",
 				},
 			})
@@ -24,6 +23,7 @@ return {
 	{
 		"neovim/nvim-lspconfig",
 		config = function()
+            local bicep_lsp_bin = "/Users/jasoncobb/.vscode/extensions/ms-azuretools.vscode-bicep-0.24.24/bicepLanguageServer/Bicep.LangServer.dll"
 			local lspconfig = require("lspconfig")
 			lspconfig.lua_ls.setup({})
 			lspconfig.omnisharp.setup({
@@ -41,6 +41,11 @@ return {
 					vim.keymap.set("n", "<leader>gt", "<cmd>!go test ./...<CR>", { buffer = 0 })
 				end,
 			})
+            lspconfig.bicep.setup({
+                cmd = {
+                    "dotnet", bicep_lsp_bin
+                }
+            })
 			vim.keymap.set("n", "K", vim.lsp.buf.hover, {})
 			vim.keymap.set("n", "gd", vim.lsp.buf.definition, {})
 			vim.keymap.set({ "n", "v" }, "<leader>ca", vim.lsp.buf.code_action, {})
