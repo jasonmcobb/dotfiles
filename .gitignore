@@ -2,3 +2,5 @@
 lazy-lock.json
 github-copilot/
 jgit/
+nvim/.config/*
+!nvim/.config/nvim/*
