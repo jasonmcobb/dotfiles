@@ -26,9 +26,12 @@ wezterm.on("update-right-status", function(window, pane)
         if bat_percent < 20 then
             bat = "🪫" .. string.format("%.0f%%", bat_percent)
         else
-            bat = "🔋 " .. string.format("%.0f%%", bat_percent)
+            bat = "🔋" .. string.format("%.0f%%", bat_percent)
         end
     end
+    -- os.execute("source /Users/jasoncobb/cpu.sh")
+    -- local cpu = os.getenv("CPU_PERCENT")
+
     window:set_right_status(wezterm.format({
         { Text = bat .. "   " .. date}
     }))

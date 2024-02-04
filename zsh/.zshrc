@@ -22,7 +22,6 @@ plugins=(
     last-working-dir
     macos
     ripgrep
-    vi-mode
     zsh-autosuggestions 
     zsh-syntax-highlighting
 )
@@ -33,7 +32,6 @@ VI_MODE_SET_CURSOR=true
 VI_MODE_RESET_PROMPT_ON_MODE_CHANGE=true
 # Required for OMZ to work
 source $ZSH/oh-my-zsh.sh
-
 # Aliases
 alias docker=podman
 alias vim=nvim
@@ -41,5 +39,7 @@ alias ls='ls -laG'
 alias pubip="curl http://ifconfig.me; echo"
 alias wifiip="ipconfig getifaddr en0"
 alias localip="ipconfig getifaddr en1"
+
 # Sourcing powerlevel10k 
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
+# neofetch "$( fortune | cowsay -f stegosaurus)" | lolcat
