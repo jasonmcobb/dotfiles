@@ -1,14 +1,19 @@
-if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
-  source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
-fi
+# if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
+  # source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
+# fi
 
 # powerlevel10k Theme
-source ~/.powerlevel10k/powerlevel10k.zsh-theme
+# source ~/.powerlevel10k/powerlevel10k.zsh-theme
 
 # Exports
 export ZSH="$HOME/.oh-my-zsh"
 export FZF_BASE=/opt/homebrew/bin/fzf
-
+export PATH="$PATH:/Users/jasoncobb/.dotnet/tools"
+export NPM_CONFIG_PREFIX="$HOME/.npm-global"
+export AZURE_TENANT_ID=""
+export AZURE_CLIENT_ID=""
+export AZURE_CLIENT_SECRET=""
+export AZURE_SUBSCRIPTION_ID=""
 # This is the default theme
 # ZSH_THEME="robbyrussell"
 ZSH_THEME="avit"
@@ -22,7 +27,7 @@ plugins=(
     last-working-dir
     macos
     ripgrep
-    zsh-autosuggestions 
+    zsh-autosuggestions
     zsh-syntax-highlighting
 )
 
@@ -39,7 +44,14 @@ alias ls='ls -laG'
 alias pubip="curl http://ifconfig.me; echo"
 alias wifiip="ipconfig getifaddr en0"
 alias localip="ipconfig getifaddr en1"
+alias lvim=/Users/jasoncobb/.local/bin/lvim
+alias fzfe='nvim $(fzf --preview="bat {}")'
 
-# Sourcing powerlevel10k 
-[[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
+eval "$(fzf --zsh)"
+# Sourcing powerlevel10k
+# [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
+# eval "$(starship init zsh)"
 # neofetch "$( fortune | cowsay -f stegosaurus)" | lolcat
+if [ "$TERM_PROGRAM" != "Apple_Terminal" ]; then
+    eval "$(oh-my-posh init zsh --config $HOME/.config/ohmyposh/my_config.toml)"
+fi

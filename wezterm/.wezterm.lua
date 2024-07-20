@@ -8,13 +8,20 @@ end
 
 -- Visual Items
 config.color_scheme = "catppuccin-macchiato"
--- config.window_decorations = 'RESIZE'
+config.window_decorations = 'RESIZE|MACOS_FORCE_DISABLE_SHADOW'
 config.font = wezterm.font_with_fallback({
     "comic code ligatures",
     "comicmono nf",
 })
 config.font_size = 13
-
+config.hide_tab_bar_if_only_one_tab = true
+config.keys = {
+	{ mods = "OPT", key = "LeftArrow", action = wezterm.action.SendKey({ mods = "ALT", key = "b" }) },
+	{ mods = "OPT", key = "RightArrow", action = wezterm.action.SendKey({ mods = "ALT", key = "f" }) },
+	{ mods = "CMD", key = "LeftArrow", action = wezterm.action.SendKey({ mods = "CTRL", key = "a" }) },
+	{ mods = "CMD", key = "RightArrow", action = wezterm.action.SendKey({ mods = "CTRL", key = "e" }) },
+	{ mods = "CMD", key = "Backspace", action = wezterm.action.SendKey({ mods = "CTRL", key = "u" }) },
+}
 -- Status bar
 wezterm.on("update-right-status", function(window, pane)
     -- "Wed Mar 3 08:14"
