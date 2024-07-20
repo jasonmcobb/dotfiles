@@ -4,8 +4,10 @@ script_dir=$( cd -- "$( dirname -- "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )
 
 # Global Variables, Edit these.
 dot_folders=(
+    bat
+    ohmyposh
+    powershell
     nvim
-    p10k
     tmux
     wezterm
     zsh
@@ -13,7 +15,7 @@ dot_folders=(
 
 font_dir="fonts"
 
-echo "[+] - $(date '+%F %T') - Dot File and Configuration Started" 
+echo "[+] - $(date '+%F %T') - Dot File and Configuration Started"
 # Install Fonts
 echo "[+] - $(date '+%F %T') - Installing Fonts"
 for file_name in $script_dir/fonts/*
@@ -24,7 +26,7 @@ done
 
 # Install oh-my-zsh
 echo "[+] - $(date '+%F %T') - Checking for oh-my-zsh"
-if ls $HOME/.oh-my-zsh >/dev/null 
+if ls $HOME/.oh-my-zsh >/dev/null
 then
     echo "    [+] - $(date '+%F %T') - oh-my-zsh found, updating"
     $HOME/.oh-my-zsh/tools/upgrade.sh >/dev/null
@@ -38,19 +40,19 @@ echo "[+] - $(date '+%F %T') - Checking for brew"
 if brew --version >/dev/null; then
     echo "    [+] - $(date '+%F %T') - brew found, updating"
     brew update
-else 
+else
     echo "[+] - $(date '+%F %T') - brew not found, installing"
     /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
 fi
 
 # Brew installer helper functions
 function install_or_upgrade {
-    if brew ls --versions "$1" >/dev/null 
+    if brew ls --versions "$1" >/dev/null
     then
-        HOMEBREW_NO_AUTO_UPDATE=1 
+        HOMEBREW_NO_AUTO_UPDATE=1
         brew upgrade "$1"
     else
-        HOMEBREW_NO_AUTO_UPDATE=1 
+        HOMEBREW_NO_AUTO_UPDATE=1
         brew install "$1"
     fi
 
@@ -60,7 +62,7 @@ function install_or_upgrade {
 function install_or_upgrade_cask {
     if brew ls --versions --cask "$1" >/dev/null
     then
-        HOMEBREW_NO_AUTO_UPDATE=1 
+        HOMEBREW_NO_AUTO_UPDATE=1
         brew upgrade --cask "$1"
     else
         HOMEBREW_NO_AUTO_UPDATE=1
@@ -73,7 +75,7 @@ function install_or_upgrade_cask {
 echo "[+] - $(date '+%F %T') - Updating brew formulae"
 for i in $(cat $script_dir/brew/brew_formulae.list)
 do
-    install_or_upgrade $i    
+    install_or_upgrade $i
 done
 
 echo "[+] - $(date '+%F %T') - Updating brew cask packages"
@@ -102,7 +104,7 @@ then
     git clone https://github.com/tmux-plugins/tpm $HOME/.tmux/plugins/tpm
 fi
 
-echo "[+] - $(date '+%F %T') - Installing TMUX Plugins" 
+echo "[+] - $(date '+%F %T') - Installing TMUX Plugins"
 $HOME/.tmux/plugins/tpm/bin/install_plugins
 
 echo "[+] - $(date '+%F %T') - Checking for Powerlevel10k"

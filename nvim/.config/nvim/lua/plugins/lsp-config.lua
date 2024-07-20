@@ -1,54 +1,91 @@
-local pid = vim.fn.getpid()
-
 return {
-	{
-		"williamboman/mason.nvim",
-		config = function()
-			require("mason").setup()
-		end,
-	},
-	{
-		"williamboman/mason-lspconfig.nvim",
-		config = function()
-			require("mason-lspconfig").setup({
-				ensure_installed = {
-					"lua_ls",
-					"omnisharp",
-					"gopls",
-					"rust_analyzer",
-				},
-			})
-		end,
-	},
-	{
-		"neovim/nvim-lspconfig",
-		config = function()
-            local bicep_lsp_bin = "/Users/jasoncobb/.vscode/extensions/ms-azuretools.vscode-bicep-0.24.24/bicepLanguageServer/Bicep.LangServer.dll"
-			local lspconfig = require("lspconfig")
-			lspconfig.lua_ls.setup({})
-			lspconfig.omnisharp.setup({
-				cmd = { "dotnet", "/Users/jasoncobb/.local/share/nvim/mason/packages/omnisharp/libexec/OmniSharp.dll", "--languageserver","--hostPID", tostring(pid) },
-				enable_roslyn_analysers = true,
-				enable_import_completion = true,
-				organize_imports_on_format = true,
-				analyze_open_documents_only = false,
-				-- root_dir = util.root_pattern("*.sln", "*.csproj", "omnisharp.json", "function.json"),
-				filetypes = { "cs", "vb", "csproj", "sln", "slnx", "props" },
-			})
-			lspconfig.gopls.setup({
-				settings = {},
-				on_attach = function(client, bufnr)
-					vim.keymap.set("n", "<leader>gt", "<cmd>!go test ./...<CR>", { buffer = 0 })
-				end,
-			})
-            lspconfig.bicep.setup({
-                cmd = {
-                    "dotnet", bicep_lsp_bin
-                }
+    'neovim/nvim-lspconfig',
+    dependencies = {
+        "williamboman/mason.nvim",
+        "williamboman/mason-lspconfig.nvim",
+        "hrsh7th/cmp-nvim-lsp",
+        "hrsh7th/cmp-buffer",
+        "hrsh7th/cmp-path",
+        "hrsh7th/cmp-cmdline",
+        "hrsh7th/nvim-cmp",
+        "L3MON4D3/LuaSnip",
+        "saadparwaiz1/cmp_luasnip",
+        "j-hui/fidget.nvim",
+    },
+
+    config = function()
+        local cmp = require('cmp')
+        local cmp_lsp = require('cmp_nvim_lsp')
+        local capabilities = vim.tbl_deep_extend(
+            'force',
+            {},
+            vim.lsp.protocol.make_client_capabilities(),
+            cmp_lsp.default_capabilities())
+
+        require('fidget').setup({})
+        require('mason').setup()
+        require('mason-lspconfig').setup({
+            ensure_installed = {},
+            handlers = {
+                function(server_name)
+                    require('lspconfig')[server_name].setup {
+                        capabilities = capabilities
+                    }
+                end,
+
+                powershell_es = function()
+                    local lspconfig = require('lspconfig')
+                    lspconfig.powershell_es.setup {
+                        bundle_path = '~/.config/nvim/custom_lsps/PowerShellEditorServices',
+                        on_attach = function(client, bufnr)
+                            vim.api.nvim_buf_set_option(bufnr, 'omnifunc', 'v:lua.vim.lsp.omnifunc')
+                        end,
+                        settings = { powershell = { codeFormatting = { Preset = 'OTBS' } } }
+                    }
+                end
+            }
+        })
+
+        local cmp_select = { behavior = cmp.SelectBehavior.Replace }
+
+        cmp.setup({
+            snippet = {
+                expand = function(args)
+                    require('luasnip').lsp_expand(args.body)
+                end,
+            },
+            mapping = cmp.mapping.preset.insert({
+                ['<C-p>'] = cmp.mapping(cmp.mapping.select_prev_item(cmp_select), { 'i' }),
+                ['<C-n>'] = cmp.mapping(cmp.mapping.select_next_item(cmp_select), { 'i' }),
+                ['<C-y>'] = cmp.mapping.confirm({ select = true }),
+                ['<C-Space>'] = cmp.mapping.complete(),
+            }),
+            sources = cmp.config.sources({
+                { name = 'nvim_lsp' },
+                { name = 'luasnip' },
+            }, {
+                { name = 'buffer' },
             })
-			vim.keymap.set("n", "K", vim.lsp.buf.hover, {})
-			vim.keymap.set("n", "gd", vim.lsp.buf.definition, {})
-			vim.keymap.set({ "n", "v" }, "<leader>ca", vim.lsp.buf.code_action, {})
-		end,
-	},
+        })
+
+        local nmap = function(keys, func, desc)
+            if desc then
+                desc = "LSP: " .. desc
+            end
+
+            vim.keymap.set("n", keys, func, { buffer = bufnr, desc = desc })
+        end
+
+        nmap("<leader>gd", vim.lsp.buf.definition, "[G]oto [D]efinition")
+        vim.diagnostic.config({
+            float = {
+                focusable = false,
+                style = 'minimal',
+                border = 'rounded',
+                source = 'always',
+                header = '',
+                prefix = '',
+            },
+        })
+    end
 }
