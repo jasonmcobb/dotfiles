@@ -1,5 +1,7 @@
 dot_folders=(
+    aerospace
     bat
+    ghostty
     ohmyposh
     powershell
     nvim
