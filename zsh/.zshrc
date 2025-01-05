@@ -8,12 +8,17 @@
 # Exports
 export ZSH="$HOME/.oh-my-zsh"
 export FZF_BASE=/opt/homebrew/bin/fzf
-export PATH="$PATH:/Users/jasoncobb/.dotnet/tools"
+export PATH="$PATH:/Users/jasoncobb/.dotnet/tools:/Users/jasoncobb/.local/bin"
+# export PATh="$PATH:/Applications/DevPod.app/Contents/Mac/devpod-cli"
+export PATH="$PATH:/Users/jasoncobb/Library/Python/3.12/bin"
 export NPM_CONFIG_PREFIX="$HOME/.npm-global"
 export AZURE_TENANT_ID=""
 export AZURE_CLIENT_ID=""
 export AZURE_CLIENT_SECRET=""
 export AZURE_SUBSCRIPTION_ID=""
+export JFROG_USERNAME=""
+export JFROG_SECRET=""
+export SSL_CERT_DIR=/Users/jasoncobb/Work/VoltageTesting/TrustStore
 # This is the default theme
 # ZSH_THEME="robbyrussell"
 ZSH_THEME="avit"
@@ -26,7 +31,6 @@ plugins=(
     kubectl
     last-working-dir
     macos
-    ripgrep
     zsh-autosuggestions
     zsh-syntax-highlighting
 )
@@ -55,3 +59,4 @@ eval "$(fzf --zsh)"
 if [ "$TERM_PROGRAM" != "Apple_Terminal" ]; then
     eval "$(oh-my-posh init zsh --config $HOME/.config/ohmyposh/my_config.toml)"
 fi
+export PATH="/opt/homebrew/opt/libpq/bin:$PATH"
