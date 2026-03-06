@@ -1,4 +1,16 @@
-theme = catppuccin-macchiato
+# Theme
+theme = Catppuccin Macchiato
+
+# Font Info
 font-family = Comic Code Ligatures
 font-family = JetBrains Mono
+font-size = 14
+
+# Window Info
 window-colorspace = "display-p3"
+background-opacity = 0.95
+# macos-titlebar-style = hidden
+
+keybind = global:cmd+ctrl+alt+grave_accent=toggle_quick_terminal
+# scrollback_lines = 10000
+# quick-terminal-autohide = true 

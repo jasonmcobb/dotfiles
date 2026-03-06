@@ -1,23 +1,25 @@
 {
-  "security.workspace.trust.untrustedFiles": "open",
-  "editor.bracketPairColorization.independentColorPoolPerBracketType": true,
-  "extensions.experimental.affinity": {
-    "asvetliakov.vscode-neovim": 1
-  },
-  "vscode-neovim.neovimExecutablePaths.darwin": "/opt/homebrew/bin/nvim",
   ///////////////////////
   // Workbench
   ///////////////////////
+  "editor.cursorBlinking": "expand",
   "http.proxyStrictSSL": false,
   "workbench.startupEditor": "newUntitledFile",
-  "workbench.iconTheme": "catppuccin-macchiato",
-  "workbench.colorTheme": "Catppuccin Macchiato",
   "workbench.editor.showIcons": true,
   "workbench.editor.highlightModifiedTabs": true,
   "editor.suggestSelection": "first",
   "explorer.compactFolders": false,
   "workbench.editor.enablePreview": false,
-  "workbench.editor.wrapTabs": true,
+  // "workbench.editor.wrapTabs": true,
+  // "workbench.activityBar.location": "hidden",
+  "workbench.editor.centeredLayoutAutoResize": true,
+  "workbench.colorTheme": "Catppuccin Macchiato",
+  "workbench.iconTheme": "catppuccin-macchiato",
+  "workbench.editor.empty.hint": "hidden",
+  "workbench.editorAssociations": {
+    "*.ipynb": "jupyter-notebook",
+  },
+  "workbench.settings.editor": "json",
   ///////////////////////
   //        Git
   ///////////////////////
@@ -26,11 +28,10 @@
   "git.autofetch": true,
   "scm.defaultViewMode": "tree",
   "files.exclude": {
-    "**/.git": false
+    "**/.git": false,
   },
-  "editor.codeLens": false,
   ///////////////////////
-  // file specific
+  // file and language specific
   ///////////////////////
   "[markdown]": {
     "editor.wordWrap": "wordWrapColumn",
@@ -38,101 +39,152 @@
     "editor.quickSuggestions": {
       "comments": "off",
       "strings": "off",
-      "other": "off"
+      "other": "off",
     },
     "editor.tabSize": 2,
     "files.trimTrailingWhitespace": false,
-    "editor.formatOnSave": false
+    "editor.formatOnSave": false,
+  },
+  "[html]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode",
+  },
+  "[jsonc]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode",
   },
   "[json]": {
     "editor.quickSuggestions": {
-      "strings": true
+      "strings": true,
     },
     "editor.tabSize": 2,
     "editor.fontLigatures": false,
-    "editor.formatOnSave": true
+    "editor.formatOnSave": true,
+    "editor.defaultFormatter": "esbenp.prettier-vscode",
   },
+  "json.schemas": [
+    {
+      "fileMatch": ["*-reginfo-*", "*-dmv-*", "*-customer-*", "*-trade-*"],
+      "url": "./admin/schema/quercus-2020-07-13.json",
+    },
+  ],
   "[arm-template]": {
     "editor.formatOnSave": true,
-    "editor.tabSize": 2
+    "editor.tabSize": 2,
+    "editor.defaultFormatter": "msazurermtools.azurerm-vscode-tools",
   },
   "[js]": {
-    "editor.formatOnSave": false
+    "editor.formatOnSave": false,
   },
   "[javascript]": {
-    "editor.formatOnSave": false
+    "editor.formatOnSave": false,
   },
   "[go]": {
     "editor.quickSuggestions": {
-      "strings": true
+      "strings": true,
     },
-    "editor.tabSize": 4
+    "editor.foldingStrategy": "indentation",
+    "editor.tabSize": 4,
   },
+  "go.toolsManagement.autoUpdate": true,
+  "go.formatTool": "gofmt",
+  "go.useLanguageServer": true,
   "[yaml]": {
     "editor.wordWrap": "on",
     "editor.quickSuggestions": {
       "comments": "off",
       "strings": "off",
-      "other": "off"
+      "other": "off",
     },
     "editor.tabSize": 2,
-    "editor.formatOnSave": false
+    "editor.formatOnSave": false,
+    "editor.defaultFormatter": "redhat.vscode-yaml",
+  },
+  "yaml.schemas": {
+    "/Users/jasoncobb/Work/azure-platform-governance-as-code/c7n-yaml-schema.json": [
+      // "*yml"
+      "*yaml",
+    ],
   },
   "[helm]": {
     "editor.wordWrap": "on",
     "editor.quickSuggestions": {
       "comments": "off",
       "strings": "off",
-      "other": "off"
+      "other": "off",
     },
-    "editor.tabSize": 2
+    "editor.tabSize": 2,
   },
   "[csharp]": {
-    "editor.formatOnSave": true
+    "editor.formatOnSave": true,
   },
+  "csharp.suppressBuildAssetsNotification": true,
   "[cshtml]": {
-    "editor.formatOnSave": false
+    "editor.formatOnSave": false,
   },
   "[aspnetcorerazor]": {
-    "editor.formatOnSave": false
-  },
-  "[powershell]": {
-    "editor.formatOnSave": false
+    "editor.formatOnSave": false,
   },
   "[kotlin]": {
-    "editor.formatOnSave": false
+    "editor.formatOnSave": false,
   },
   "[c]": {
     "editor.wordBasedSuggestions": "off",
     "editor.suggest.insertMode": "replace",
     "editor.semanticHighlighting.enabled": true,
-    "editor.formatOnSave": false
+    "editor.formatOnSave": false,
   },
-  "editor.tokenColorCustomizations": {
-    "comments": "#ff9d00",
-    "[Material Theme]": {
-      "comments": "#229999"
+  "[python]": {
+    "editor.formatOnType": true,
+  },
+  "autopep8.args": ["--max-line-length", "120"],
+  "python.languageServer": "Default",
+  "[powershell]": {
+    "editor.formatOnSave": true,
+  },
+  "powershell.powerShellDefaultVersion": "pwsh",
+  "powershell.powerShellAdditionalExePaths": {
+    "pwsh": "/usr/local/bin/pwsh",
+  },
+  "[bicep]": {
+    "editor.tabSize": 2,
+    "editor.insertSpaces": true,
+    "files.insertFinalNewline": true,
+    "editor.suggestSelection": "first",
+    "editor.suggest.snippetsPreventQuickSuggestions": false,
+    "editor.suggest.showWords": true,
+    // "editor.inlineSuggest.enabled": true,
+    "editor.quickSuggestions": {
+      "other": "on",
+      "comments": "on",
+      "strings": "on",
     },
-    "textMateRules": [
-      {
-        "scope": "variable.other.member",
-        "settings": {
-          "foreground": "#ff9d00"
-        }
-      }
-    ]
   },
-  "editor.semanticHighlighting.enabled": true,
+  "[bicep-params]": {
+    "editor.tabSize": 2,
+    "editor.insertSpaces": true,
+    "files.insertFinalNewline": true,
+    "editor.suggestSelection": "first",
+    "editor.suggest.snippetsPreventQuickSuggestions": false,
+    "editor.suggest.showWords": false,
+    // "editor.inlineSuggest.enabled": true,
+    "editor.quickSuggestions": {
+      "other": "on",
+      "comments": "on",
+      "strings": "on",
+    },
+  },
   ///////////////////////
   //     editor
   ///////////////////////
+  "editor.tokenColorCustomizations": {
+    "comments": "#ff9d00",
+  },
+  "editor.semanticHighlighting.enabled": true,
+  "editor.wordWrap": "off",
+  "editor.wordWrapColumn": 120,
   "editor.showFoldingControls": "always",
   "editor.formatOnSave": true,
-  "editor.rulers": [
-    120
-  ],
+  "editor.rulers": [120],
   "editor.parameterHints.enabled": false,
-  "holiday.gearIconStyle": "frosty",
   "editor.fontSize": 12,
   "editor.lineHeight": 1.6,
   "editor.fontFamily": "Comic Code Ligatures",
@@ -141,13 +193,22 @@
   "editor.cursorSmoothCaretAnimation": "on",
   "editor.renderControlCharacters": true,
   "editor.renderWhitespace": "boundary",
-  "code-eol.highlightNonDefault": true,
   "editor.minimap.enabled": false,
   "editor.minimap.showSlider": "always",
   "editor.acceptSuggestionOnEnter": "off",
-  "editor.bracketPairColorization.enabled": true,
-  "editor.guides.bracketPairs": "active",
-  "editor.lineNumbers": "relative",
+  "editor.guides.bracketPairs": true,
+  // "editor.lineNumbers": "relative",
+  "editor.linkedEditing": true,
+  "editor.largeFileOptimizations": false,
+  "editor.guides.indentation": true,
+  "editor.inlineSuggest.enabled": false,
+  "editor.quickSuggestions": {
+    "other": "on",
+    "comments": "off",
+    "strings": "off",
+  },
+  "diffEditor.ignoreTrimWhitespace": false,
+  "diffEditor.wordWrap": "off",
   ///////////////////////
   //     files
   ///////////////////////
@@ -156,74 +217,135 @@
   "files.autoSaveDelay": 10000,
   "files.associations": {
     "**/.pipelines/**/*.yml": "azure-pipelines",
-    "**/helm/**/*.yaml": "helm"
+    "**/helm/**/*.yaml": "helm",
   },
+  "explorer.confirmDragAndDrop": false,
+  "explorer.confirmDelete": false,
   ///////////////////////
   //     Window
   ///////////////////////
   "window.titleBarStyle": "custom",
   "workbench.sideBar.location": "right",
+  "workbench.panel.showLabels": false,
   ///////////////////////
   //  Terminal
   ///////////////////////
   "terminal.integrated.tabs.enabled": true,
-  "terminal.integrated.fontFamily": "ComicShannsMono Nerd Font",
+  "terminal.integrated.fontFamily": "ComicMono NF",
   "terminal.integrated.fontSize": 13,
   "terminal.integrated.lineHeight": 1.1,
+  "terminal.integrated.enableMultiLinePasteWarning": "auto",
   ///////////////////////
   // Debugger
   ///////////////////////
-  "debug.openDebug": "openOnDebugBreak",
-  // "debug.node.autoAttach": "on",
+  "debug.openDebug": "openOnSessionStart",
   "debug.toolBarLocation": "docked",
   "debug.openExplorerOnEnd": true,
   ///////////////////////
-  //     Language Specific
+  // GitHub Copilot Specific
   ///////////////////////
-  "json.schemas": [
-    {
-      "fileMatch": [
-        "*-reginfo-*",
-        "*-dmv-*",
-        "*-customer-*",
-        "*-trade-*"
-      ],
-      "url": "./admin/schema/quercus-2020-07-13.json"
-    }
-  ],
-  ///////////////////////
-  //     Other
-  ///////////////////////
-  "azureFunctions.showCoreToolsWarning": false,
-  "todo.timekeeping.created.enabled": true,
-  "explorer.confirmDragAndDrop": false,
-  "explorer.confirmDelete": false,
-  "go.formatTool": "gofmt",
-  "workbench.settings.editor": "json",
-  "go.useLanguageServer": true,
-  "powershell.powerShellDefaultVersion": "PowerShell",
-  "python.languageServer": "Default",
-  "azurite.debug": true,
-  "azureFunctions.showProjectWarning": false,
-  "diffEditor.ignoreTrimWhitespace": false,
-  "workbench.editorAssociations": {
-    "*.ipynb": "jupyter-notebook"
-  },
-  "editor.wordWrap": "off",
-  "diffEditor.wordWrap": "off",
-  "csharp.suppressBuildAssetsNotification": true,
-  "editor.largeFileOptimizations": false,
-  "editor.guides.indentation": true,
-  "redhat.telemetry.enabled": true,
-  "[python]": {
-    "editor.formatOnType": true
-  },
-  "go.toolsManagement.autoUpdate": true,
-  "workbench.editor.empty.hint": "hidden",
   "github.copilot.enable": {
     "*": true,
     "plaintext": false,
     "markdown": false,
-    "scminput": false
-  }
+    "scminput": false,
+  },
+  "github.copilot.selectedCompletionModel": "claude",
+  ///////////////////////
+  //     Other
+  ///////////////////////
+  "azureResourceManagerTools.parameterFiles": {
+    "/Users/jasoncobb/CarMax/GitHub/cctsplunk/appGateway/template.json": "params.json",
+    "/Users/jasoncobb/CarMax/GitHub/catalyst/inventory-vehicle-azure-resources/src/CarMax.Inventory.Vehicle.ResourceGroup/Templates/azuredeploy.json": "dev-east.parameters.json",
+    "/Users/jasoncobb/Documents/AzureLab/LabFiles/Module01-Lab01/azuredeploy.json": "azuredeploy.parameters.json",
+    "/Users/jasoncobb/Documents/AzureLab/repo/AzureAppMonitoringTraining2022/ArmTemplates/azuredeploy.json": "azuredeploy.parameters.json",
+    "/Users/jasoncobb/CarMax/GitHub/catalyst/sells-payoff-service/src/CarMax.Sells.Payoff.ResourceGroup.AppSettings/templates/azuredeploy.json": "dev-east.parameters.json",
+    "/Users/jasoncobb/CarMax/GitHub/catalyst/buys-disclosure-service/src/CarMax.Buys.Disclosure.ResourceGroup.AppSettings/templates/azuredeploy.json": "dev-east.parameters.json",
+    "/Users/jasoncobb/CarMax/GitHub/catalyst/buys-image-azure-resources/src/CarMax.Buys.Image.ResourceGroup.TrafficManager/Templates/azuredeploy.json": "dev-central.parameters.json",
+    "/Users/jasoncobb/CarMax/GitHub/catalyst/buys-image-azure-resources/src/CarMax.Buys.Image.ResourceGroup.East/Templates/azuredeploy.json": "dev-east.parameters.json",
+    "/Users/jasoncobb/CarMax/GitHub/catalyst/buys-image-service/src/Carmax.Buys.Image.ResourceGroup.East.AppSettings/templates/azuredeploy.json": "prod-east.parameters.json",
+    "/Users/jasoncobb/CarMax/GitHub/catalyst/buys-image-service/src/Carmax.Buys.Image.ResourceGroup.AppSettings/templates/azuredeploy.json": "dev-east.parameters.json",
+    "/Users/jasoncobb/CarMax/GitHub/catalyst/inventory-service-disclosure-azure-resources/src/CarMax.Inventory.ServiceDisclosure.ResourceGroup.TrafficManager/Templates/azuredeploy.json": "dev-central.parameters.json",
+    "/Users/jasoncobb/CarMax/GitHub/catalyst/inventory-service-disclosure-azure-resources/src/CarMax.Inventory.ServiceDisclosure.ResourceGroup/Templates/azuredeploy.json": "dev-east.parameters.json",
+    "/Users/jasoncobb/CarMax/GitHub/catalyst/inventory-service-disclosure-service/src/CarMax.Inventory.ServiceDisclosure.Service.AppSettings/Templates/azuredeploy.json": "prod-west.parameters.json",
+    "/Users/jasoncobb/CarMax/GitHub/catalyst/inventory-service-disclosure-service/src/CarMax.Inventory.ServiceDisclosure.Functions.AppSettings/Templates/azuredeploy.json": "prod-west.parameters.json",
+    "/Users/jasoncobb/CarMax/GitHub/catalyst/buys-customer-azure-resources/src/CarMax.Buys.Customer.ResourceGroup/Templates/azuredeploy.json": "qa-west.parameters.json",
+    "/Users/jasoncobb/CarMax/GitHub/catalyst/buys-customer-service/src/CarMax.Buys.Customer.ResourceGroup.East.AppSettings/templates/azuredeploy.json": "dev-east.parameters.json",
+    "/Users/jasoncobb/CarMax/GitHub/catalyst/buys-customer-service/src/CarMax.Buys.Customer.ResourceGroup.AppSettings/templates/azuredeploy.json": "dev-east.parameters.json",
+  },
+  "redhat.telemetry.enabled": true,
+  "security.workspace.trust.untrustedFiles": "open",
+  "extensions.experimental.affinity": {
+    "asvetliakov.vscode-neovim": 1,
+  },
+  "cmake.pinnedCommands": [
+    "workbench.action.tasks.configureTaskRunner",
+    "workbench.action.tasks.runTask",
+  ],
+  "bicep.enableSurveys": false,
+  "cSpell.userWords": ["bicepparam", "KUSTO"],
+  "window.confirmSaveUntitledWorkspace": false,
+  "@azure.argTenant": "ed38c4bc-a204-4511-8009-34c0612c882a",
+  "github.copilot.chat.codeGeneration.instructions": [],
+  "github.copilot.nextEditSuggestions.enabled": true,
+  "github.copilot.chat.followUps": "always",
+  "github.copilot.chat.codesearch.enabled": true,
+  "github.copilot.chat.agent.thinkingTool": true,
+  "cSpell.enabledNotifications": {
+    "Average Word Length too Long": false,
+    "Lines too Long": false,
+    "Maximum Word Length Exceeded": false,
+  },
+  "database-client.autoSync": true,
+  "pgsql.serverGroups": [
+    {
+      "name": "Servers",
+      "id": "7A2638CD-769D-45DF-99D4-256D4031C228",
+      "isDefault": true,
+    },
+  ],
+  "pgsql.connections": [
+    {
+      "id": "B5CB8C36-DF3A-4D8E-9E76-5C74B39E9765",
+      "groupId": "7A2638CD-769D-45DF-99D4-256D4031C228",
+      "authenticationType": "AzureMFA",
+      "connectTimeout": 15,
+      "applicationName": "vscode-pgsql",
+      "clientEncoding": "utf8",
+      "sslmode": "require",
+      "server": "c7n-dev-eastus2-db.postgres.database.azure.com",
+      "azureSubscriptionId": "c6f8d539-5fbd-4d9a-8974-fa13472cfc7e",
+      "azureResourceGroup": "kmx-dev-eastus2-c7n",
+      "database": "cloud-custodian",
+      "accountId": "b72c888c-c5bd-4c39-8e42-c852637d6926.ed38c4bc-a204-4511-8009-34c0612c882a",
+      "profileName": "C7N - Dev",
+      "user": "Privileged - Jason M Cobb - jcobb-cl@carmax.com",
+      "password": "",
+      "email": "jcobb-cl@carmax.com",
+      "azureAccountToken": "",
+      "expiresOn": 0,
+      "profileSource": 0,
+      "entraUserName": "jcobb-cl@carmax.com",
+      "sshPassword": "",
+    },
+  ],
+  "vscode-pokemon.pokemonSize": "large",
+  "chat.instructionsFilesLocations": {
+    ".github/instructions": true,
+    "/Users/jasoncobb/.aitk/instructions/": true,
+  },
+  "githubPullRequests.pullBranch": "never",
+  "azureFunctions.showProjectWarning": false,
+  "everforest.darkContrast": "hard",
+  "everforest.darkWorkbench": "material",
+  "claudeCode.preferredLocation": "panel",
+  "chat.viewSessions.orientation": "stacked",
+  "notebook.editorOptionsCustomizations": {
+    "editor.tabSize": 2,
+    "editor.indentSize": 2,
+    "editor.insertSpaces": true,
+  },
+  "python.analysis.typeCheckingMode": "basic",
+  "excalidraw.theme": "auto",
 }
+

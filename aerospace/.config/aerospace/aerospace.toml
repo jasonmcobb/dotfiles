@@ -20,7 +20,7 @@ start-at-login = true
 enable-normalization-flatten-containers = true
 enable-normalization-opposite-orientation-for-nested-containers = true
 
-# See: https://nikitabobko.github.io/AeroSpace/guide#layouts
+# See: https://nikitabobko.github.io/AeroSpace/guide#layoutj
 # The 'accordion-padding' specifies the size of accordion padding
 # You can set 0 to disable the padding feature
 accordion-padding = 30
@@ -126,3 +126,9 @@ cmd-alt-ctrl-shift-h = ['join-with left', 'mode main']
 cmd-alt-ctrl-shift-j = ['join-with down', 'mode main']
 cmd-alt-ctrl-shift-k = ['join-with up', 'mode main']
 cmd-alt-ctrl-shift-l = ['join-with right', 'mode main']
+
+[[on-window-detected]]
+if.app-id="com.mitchellh.ghostty"
+run=[
+  "layout floating",
+]
